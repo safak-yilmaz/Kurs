@@ -1,5 +1,5 @@
 ﻿
-@model Entities.Users.UserDtos.UserDto
+@model Entities.Users.User
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <body>
 
@@ -8,20 +8,21 @@
       <div class="content">
         <!--Echo out errors here. See example-->
         <!--<p class=error>Error, wrong username or password used. Please, try again.-->
-        <form>
-            <div class="mat-in d-flex justify-content-center">@Html.LabelFor( f => f.User.UserName)<br><br>
-                @Html.TextBoxFor(f => f.User.UserName, new {title = "Kullanıcı adınızı giriniz.",@class="mt-5",@Value=@ViewBag.userName})
+    
+            <div class="mat-in d-flex justify-content-center">@Html.LabelFor( f => f.UserName)<br><br>
                 <span class="bar"></span>
-                
+                   @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
-            <div class="mat-in d-flex justify-content-center">@Html.LabelFor( f => f.User.Password)<br><br>
-                @Html.PasswordFor(f => f.User.Password, new { title = "Kullanıcı şifrenizi giriniz.",@class="mt-5",@Value=@ViewBag.password }) 
+            <div class="mat-in d-flex justify-content-center">@Html.LabelFor( f => f.Password)<br><br>
+                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 <span class="bar"></span>
                  
 
             </div>
             <button type="submit" name="submit" id="login">Login</button>
-        </form>
+       
    
     </div>
  }          

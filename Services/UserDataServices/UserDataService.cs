@@ -69,12 +69,12 @@ namespace Services.UserDataServices
         public async Task<IResult> AddAsync(UserAddDto userAddDto)
         {
             var user = _mapper.Map<User>(userAddDto);
-            if (_context.Users.Any(x => x.UserName != userAddDto.UserName))
-                await _unitOfWork.Users.AddAsync(user)
-                  .ContinueWith(t => _unitOfWork.SaveAsync());
-            else
+            if (_context.Users.Any(x => x.UserName == userAddDto.UserName))
                 return new Result(ResultStatus.Error, $"{user.UserName} Kullanıcı Adı Daha Önceden Alınmış");
-          
+
+            else
+                await _unitOfWork.Users.AddAsync(user)
+                    .ContinueWith(t => _unitOfWork.SaveAsync());
             return new Result(ResultStatus.Success, $"{user.Name} Adlı Kullanıcı Başarıyla Eklenmiştir.");
         }
 

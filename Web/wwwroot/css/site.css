@@ -12,6 +12,18 @@ html, body {
 }
 body {
     overflow-x: hidden !important;
+    overflow-y: hidden !important;
+
+}
+body {
+  
+}
+
+#gradient {
+    width: 100%;
+    height: 800px;
+    padding: 0px;
+    margin: 0px;
 }
 /*The form part*/
 .content {

@@ -25,7 +25,7 @@
         <li> @Html.ActionLink("Url List","Privacy", "Home" )</li>
         <li> @Html.ActionLink("User List","UserList", "User" )</li>
         <li> @Html.ActionLink("User Create","UserCreate", "User" )</li>
-        <li>@Html.ActionLink("Sign Out", "Index")</li>
+        <li>@Html.ActionLink("Sign Out", "Log" , "Home")</li>
       </ul>
     </div>
   </div>
@@ -42,10 +42,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+           Username
         </th>
           <th>
-            @Html.DisplayNameFor(model => model.Password)
+           Password
         </th>
         <th></th>
     </tr>
@@ -60,8 +60,8 @@
         </td>
      
         <td>
-            @Html.ActionLink("Update", "UserUpdate", new {  id  = item .Id }) |
-            @Html.ActionLink("Delete", "UserDelete", new { id  = item .Id })
+            @Html.ActionLink("", "UserUpdate", new {  id  = item .Id }, new { @class= "btn btn-success fas fa-edit" }) |
+            @Html.ActionLink("", "UserDelete", new { id  = item .Id }, new { @class= "btn btn-danger far fa-trash-alt" })
         </td>
     </tr>
 }

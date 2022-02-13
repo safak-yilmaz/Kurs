@@ -1,4 +1,6 @@
 ﻿using Entities.Users.UserDtos;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Services.LoginServices;
 using Services.PageUrlsDataServices;
@@ -53,23 +55,35 @@ namespace Web.Controllers
         }
 
 
-        public async Task<IActionResult> Login(string userName, string password)
+        public async Task<IActionResult> Login( string userName, string password)
         {
-            
-        
-            try
+            var users = await _loginService.LoginAsync(userName, password);
+            if (users != null)
             {
-                var users = await _loginService.LoginAsync(userName, password);
+
+                var token = _tokenService.GetToken(users);
+                var response = new
+                {
+                    Status = true,
+                    Token = token,
+                    Type = "Bearer",
+                    UserId = users.Data.User.Id,
+                    PageUrlList = users.Data.User.PageUrls
+                };
+               
                 return RedirectToAction("Privacy", "Home");
+
+
             }
-            catch (Exception)
-            {
+            else
+                return BadRequest(string.Empty);
 
-                return RedirectToAction("Index", "Home");
-            }
-
-
-
+        }
+       
+        public async Task<IActionResult> LogOut()
+        {
+            Response.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
