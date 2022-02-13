@@ -1,0 +1,65 @@
+﻿<!-- Editable table -->
+@model IEnumerable<Entities.PageUrls.PageUrlsDtos.PageUrlsListDtos>
+<div class="container-fluid">
+  <nav class="navbar">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button class="navbar-toggler" data-toggle="open-navbar1">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="#">
+        <h4>Awesome<span>logo</span></h4>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="open-navbar1">
+      <ul class="navbar-nav">
+        <li class="active"><a href="#">List</a></li> 
+        <li><a href="#">Create</a></li>
+        <li><a href="#">Contact</a></li>
+        <li>@Html.ActionLink("Sign Out", "Index")</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Users
+  </h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+   
+      
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PageUrls)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model!) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageUrls)    
+        </td>
+     
+        <td>
+            @Html.ActionLink("Update", "Update", new { }) |
+            @Html.ActionLink("Details", "Details", new { }) |
+            @Html.ActionLink("Delete", "Delete", new {  })
+        </td>
+    </tr>
+}
+
+</table>
+    </div>
+  </div>
+</div>
+
+</div>
