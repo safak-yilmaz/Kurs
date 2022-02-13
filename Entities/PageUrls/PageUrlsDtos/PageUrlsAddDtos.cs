@@ -21,9 +21,9 @@ namespace Entities.PageUrls.PageUrlsDtos
         [Required]
         public Guid Id { get; set; }
         [Required]
-        public bool IsActive { get; set; }
-        [Required]
-        public Guid UserId { get; set; }
+        public bool IsActive { get; set; } = true;
+        
+        public Guid? UserId { get; set; }
         
 
     }

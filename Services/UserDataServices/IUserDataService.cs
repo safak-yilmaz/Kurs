@@ -12,9 +12,10 @@ namespace Services.UserDataServices
         Task<IDataResult<UserListDto>> GetListAsync();
         Task<IResult> AddAsync(UserAddDto userAddDto);
         Task<IResult> UpdateAsync(UserUpdateDto userUpdateDto);
-     
-        
-        
+        Task<IResult> DeleteAsync(Guid userId);
+
+
+
 
     }
 }

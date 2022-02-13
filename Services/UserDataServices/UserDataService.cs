@@ -54,16 +54,27 @@ namespace Services.UserDataServices
             return new DataResult<UserListDto>(ResultStatus.Error, "Kayıtlı Bir Kullanıcı Bulunamadı", null);
 
         }
+        public async Task<IResult> DeleteAsync(Guid userId)
+        {
+            var users = await _unitOfWork.Users.GetAsync(p => p.Id == userId);
+            if (users != null)
+            {
+                users.IsActive = false;
+                await _unitOfWork.Users.DeleteAsync(users).ContinueWith(t => _unitOfWork.SaveAsync());
+                return new Result(ResultStatus.Success, $"{users.UserName} Silindi.");
+            }
+            return new Result(ResultStatus.Error, "Kayıtlı Bir URL Bulunamadı");
+        }
 
         public async Task<IResult> AddAsync(UserAddDto userAddDto)
         {
             var user = _mapper.Map<User>(userAddDto);
             if (_context.Users.Any(x => x.UserName != userAddDto.UserName))
-                return new Result(ResultStatus.Error, $"{user.UserName} Kullanıcı Adı Daha Önceden Alınmış");
-           
-            else
                 await _unitOfWork.Users.AddAsync(user)
-                    .ContinueWith(t => _unitOfWork.SaveAsync());
+                  .ContinueWith(t => _unitOfWork.SaveAsync());
+            else
+                return new Result(ResultStatus.Error, $"{user.UserName} Kullanıcı Adı Daha Önceden Alınmış");
+          
             return new Result(ResultStatus.Success, $"{user.Name} Adlı Kullanıcı Başarıyla Eklenmiştir.");
         }
 
@@ -74,7 +85,6 @@ namespace Services.UserDataServices
             {
                 user.UserName = userUpdateDto.UserName;
                 user.Password = userUpdateDto.Password;
-                user.IsActive = userUpdateDto.IsActive;
                 user.UpdateDate = userUpdateDto.UpdateDate = DateTime.Now;
                
                 await _unitOfWork.Users.UpdateAsync(user).ContinueWith(t => _unitOfWork.SaveAsync());

@@ -23,7 +23,7 @@ namespace DataAccess.Mapping
                 .IsRequired(true);
 
             builder.Property(a => a.UserId)
-                .IsRequired(true);
+                .IsRequired(false);
         }
     }
 }

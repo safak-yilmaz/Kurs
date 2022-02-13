@@ -1,7 +1,11 @@
 ﻿<!-- Editable table -->
-@model IEnumerable<Entities.PageUrls.PageUrl>
+@{
+    ViewBag.Title = "UserList";
+}
+@model IEnumerable<Entities.Users.User>
+ 
 <div class="container-fluid">
-  <nav class="navbar">
+ <nav class="navbar">
   <div class="container">
 
     <div class="navbar-header">
@@ -27,10 +31,9 @@
   </div>
 </nav>
 
-
 <div class="card">
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
-    URL List
+    User List
   </h3>
   <div class="card-body">
     <div id="table" class="table-editable">
@@ -39,10 +42,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UrlName)
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
           <th>
-            @Html.DisplayNameFor(model => model.UrlAddress)
+            @Html.DisplayNameFor(model => model.Password)
         </th>
         <th></th>
     </tr>
@@ -50,15 +53,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UrlName)    
+            @Html.DisplayFor(modelItem => item.UserName)    
         </td>
           <td>
-            @Html.DisplayFor(modelItem => item.UrlAddress)    
+            @Html.DisplayFor(modelItem => item.Password)    
         </td>
      
         <td>
-            @Html.ActionLink("Update", "Update", new {  id  = item .Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id  = item .Id })
+            @Html.ActionLink("Update", "UserUpdate", new {  id  = item .Id }) |
+            @Html.ActionLink("Delete", "UserDelete", new { id  = item .Id })
         </td>
     </tr>
 }

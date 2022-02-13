@@ -10,6 +10,14 @@ namespace Web.Controllers
         {
             return View();
         }
+        public IActionResult create()
+        {
+            return View();
+        }
+        public IActionResult delete()
+        {
+            return View();
+        }
 
         private readonly IPageUrlsDataService _pageUrlsDataService;
 
@@ -36,7 +44,7 @@ namespace Web.Controllers
         {
             var result = await _pageUrlsDataService.GetAsync(id);
             if (result != null)
-                return Ok(result);
+                return RedirectToAction("Privacy", "Home");
             return BadRequest();
         }
 
@@ -46,38 +54,38 @@ namespace Web.Controllers
         {
             var result = await _pageUrlsDataService.GetUserIdAsync(id);
             if (result != null)
-                return Ok(result);
+                return RedirectToAction("delete", "Home");
             return BadRequest();
         }
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> AddAsync([FromBody] PageUrlsAddDtos pageUrlsAddDtos)
+        public async Task<IActionResult> PageAddAsync(PageUrlsAddDtos pageUrlsAddDtos)
         {
             var result = await _pageUrlsDataService.AddAsync(pageUrlsAddDtos);
             if (result != null)
-                return RedirectToAction("Privacy", "Home", result);
+                return RedirectToAction("Privacy", "Home");
             return BadRequest();
 
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> UpdateAsync([FromBody] PageUrlsUpdateDtos pageUrlsUpdateDtos)
+        public async Task<IActionResult> PageUpdateAsync(PageUrlsUpdateDtos pageUrlsUpdateDtos)
         {
             var result = await _pageUrlsDataService.UpdateAsync(pageUrlsUpdateDtos);
             if (result != null)
-                return Ok(result);
+                return RedirectToAction("Privacy", "Home");
             return BadRequest();
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> PageDelete(Guid id)
         {
             var result = await _pageUrlsDataService.DeleteAsync(id);
             if (result != null)
-                return Ok(result);
+                return RedirectToAction("Privacy", "Home");
             return BadRequest();
         }
     }

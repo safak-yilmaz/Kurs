@@ -18,7 +18,7 @@ namespace Entities.Users.UserDtos
         [Required]
         public Guid Id { get; set; }
         [Required]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         
     }
 }

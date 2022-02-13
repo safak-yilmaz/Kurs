@@ -10,7 +10,7 @@
         <!--<p class=error>Error, wrong username or password used. Please, try again.-->
         <form>
             <div class="mat-in d-flex justify-content-center">@Html.LabelFor( f => f.User.UserName)<br><br>
-                @Html.TextBoxFor(f => f.User.UserName, new {title = "Kullanıcı adınızı giriniz.",@class="mt-5",@Value=@ViewBag.user})
+                @Html.TextBoxFor(f => f.User.UserName, new {title = "Kullanıcı adınızı giriniz.",@class="mt-5",@Value=@ViewBag.userName})
                 <span class="bar"></span>
                 
             </div>
