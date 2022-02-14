@@ -47,7 +47,9 @@ namespace Web.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AddAsync(UserAddDto userAddDto)
         {
+            
             var result = await _userService.AddAsync(userAddDto);
+           
             if (result != null)
                 return RedirectToAction("UserList", "User");
             return BadRequest();

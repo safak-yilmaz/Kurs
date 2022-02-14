@@ -1,6 +1,7 @@
 ﻿using Entities.PageUrls.PageUrlsDtos;
 using Microsoft.AspNetCore.Mvc;
 using Services.PageUrlsDataServices;
+using Services.UserDataServices;
 
 namespace Web.Controllers
 {
@@ -20,6 +21,7 @@ namespace Web.Controllers
         }
 
         private readonly IPageUrlsDataService _pageUrlsDataService;
+
 
         public PageUrlController(IPageUrlsDataService pageUrlsDataService)
         {
@@ -57,11 +59,15 @@ namespace Web.Controllers
                 return RedirectToAction("delete", "Home");
             return BadRequest();
         }
-
+        public class tokk
+        {
+            public Guid tokakaka;
+        }
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> PageAddAsync(PageUrlsAddDtos pageUrlsAddDtos)
         {
+           
             var result = await _pageUrlsDataService.AddAsync(pageUrlsAddDtos);
             if (result != null)
                 return RedirectToAction("Privacy", "Home");

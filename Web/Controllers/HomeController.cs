@@ -53,8 +53,7 @@ namespace Web.Controllers
                 return View(result.Data.PageUrl);
             return BadRequest();
         }
-
-
+      
         public async Task<IActionResult> Login( string userName, string password)
         {
             var users = await _loginService.LoginAsync(userName, password);
@@ -71,7 +70,8 @@ namespace Web.Controllers
                     PageUrlList = users.Data.User.PageUrls
                 };
                
-                return RedirectToAction("Privacy", "Home");
+               
+                return RedirectToAction("Privacy", "Home", new { id = response.UserId });
 
 
             }
@@ -96,9 +96,9 @@ namespace Web.Controllers
             return BadRequest();
         }
 
-        public async Task<IActionResult> PrivacyAsync()
+        public async Task<IActionResult> PrivacyAsync(Guid id)
         {
-            var result = await _pageUrlsDataService.GetListAsync();
+            var result = await _pageUrlsDataService.GetUserIdAsync(id);
 
             return View(result.Data.PageUrls);
         }
